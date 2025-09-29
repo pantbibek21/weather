@@ -1,44 +1,96 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Form.module.scss";
 
 const Form = () => {
   const [userInput, setUserInput] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [location, setLocation] = useState({ lat: null, long: null });
+  const [location, setLocation] = useState({ lat: null, lon: null });
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     if (!userInput) {
       setErrorMsg("Enter the location first!");
-      return;
+      return false;
     }
+    // get the coordinates using geocoding api
+    const coordinates = await geoCodeUserInput();
+
+    setLocation(coordinates);
+
+    // call the weather api
+    getWeather(coordinates);
   };
+
+  async function getWeather(coordinates) {
+    const API_KEY = import.meta.env.VITE_API_KEY;
+    const url = `${`https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=hourly,daily&appid=`}${API_KEY}`;
+    const response = await fetch(url);
+
+    try {
+      if (!response.ok) {
+        setErrorMsg("Something wrong with weather provider! Not our fault : )");
+        throw new Error(response.status);
+      }
+      const result = await response.json();
+    } catch (error) {
+      console.log(error);
+      setErrorMsg(
+        "Ohh boy! Sorry, we can't help you right now! Some error occured!"
+      );
+    }
+  }
 
   const handleChange = (e) => {
     setErrorMsg("");
     setUserInput(e.target.value);
   };
 
-  const onLocationClick = () => {
+  const onLocationClick = async () => {
     if (navigator.geolocation) {
       setIsLoading(true);
-      navigator.geolocation.getCurrentPosition(success, error);
-    } else {
-      setErrorMsg("Geolocation is not supported by this browser.");
+      try {
+        const coordinates = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              setIsLoading(false);
+              resolve({
+                lat: position.coords.latitude,
+                lon: position.coords.longitude,
+              });
+            },
+            (err) => {
+              setIsLoading(false);
+              reject(err);
+            }
+          );
+        });
+
+        getWeather(coordinates);
+      } catch (err) {
+        setErrorMsg("Sorry, turn on the location!");
+      }
     }
   };
 
-  function success(position) {
-    const lat = position.coords.latitude;
-    const long = position.coords.longitude;
-    setIsLoading(false);
-    setLocation({ lat, long });
-  }
+  async function geoCodeUserInput() {
+    const API_KEY = import.meta.env.VITE_API_KEY;
+    const url = `${`http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=1&appid=`}${API_KEY}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        setErrorMsg(
+          "Ohh no! The serviceman to fetch weather is sick! Contact admin!"
+        );
+        throw new Error(`Response status: ${response.status}`);
+      }
 
-  function error() {
-    setErrorMsg("Sorry, turn on the location!");
+      const result = await response.json();
+      return { lat: result[0].lat, lon: result[0].lon };
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 
   return (

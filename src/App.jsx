@@ -1,13 +1,19 @@
+import { useState } from "react";
 import "./App.css";
 import Form from "./component/Form";
 import Header from "./component/Header";
 
 function App() {
+  const [weatherData, setWeatherData] = useState();
+
+  console.log("Weather data in parent:");
+  console.log(weatherData);
+
   return (
     <>
       <div className="page-container">
         <Header />
-        <Form />
+        <Form setWeatherData={setWeatherData} />
       </div>
     </>
   );

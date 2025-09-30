@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "./Form.module.scss";
 
-const Form = () => {
+const Form = ({ setWeatherData }) => {
   const [userInput, setUserInput] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({ lat: null, lon: null });
+
+  console.log("I am in child");
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -14,6 +16,8 @@ const Form = () => {
       setErrorMsg("Enter the location first!");
       return false;
     }
+    setIsLoading(true);
+
     // get the coordinates using geocoding api
     const coordinates = await geoCodeUserInput();
 
@@ -34,6 +38,9 @@ const Form = () => {
         throw new Error(response.status);
       }
       const result = await response.json();
+      setIsLoading(false);
+      // pass the weather data to parent component
+      setWeatherData(result);
     } catch (error) {
       console.log(error);
       setErrorMsg(

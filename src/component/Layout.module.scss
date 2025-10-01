@@ -1,0 +1,83 @@
+.layoutContainer {
+  border: 2px solid rgba(0, 105, 137, 0.167);
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.13);
+  margin: 48px;
+  padding: 36px;
+  border-radius: 8px;
+  cursor: default;
+
+  .sectionHeading {
+    margin-bottom: 24px;
+    color: rgb(0, 105, 137);
+  }
+
+  .card {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    width: 120px;
+    display: inline-block;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: aliceblue;
+
+    .label {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .icon {
+      font-size: 28px;
+    }
+
+    .value {
+      margin-left: 4px;
+      font-size: 22px;
+    }
+  }
+
+  .cardContainer {
+    display: flex;
+    gap: 24px;
+  }
+
+  .topRow {
+    display: flex;
+    align-items: center;
+    gap: 72px;
+    margin-bottom: 60px;
+
+    .left {
+      .largeContent {
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 120px;
+        }
+
+        .currentTemp {
+          font-size: 64px;
+        }
+      }
+      .currentSituation {
+        font-size: 24px;
+        margin-bottom: 24px;
+      }
+
+      .feelsLike {
+        font-size: 20px;
+        font-style: italic;
+      }
+    }
+
+    .right {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+  }
+
+  .nextHourWeatherSection {
+    margin-bottom: 60px;
+  }
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Form from "./component/Form";
 import Header from "./component/Header";
+import Layout from "./component/Layout";
 
 function App() {
   const [weatherData, setWeatherData] = useState();
@@ -14,6 +15,7 @@ function App() {
       <div className="page-container">
         <Header />
         <Form setWeatherData={setWeatherData} />
+        <Layout />
       </div>
     </>
   );

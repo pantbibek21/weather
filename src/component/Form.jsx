@@ -29,7 +29,7 @@ const Form = ({ setWeatherData }) => {
 
   async function getWeather(coordinates) {
     const API_KEY = import.meta.env.VITE_API_KEY;
-    const url = `${`https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=hourly,daily&appid=`}${API_KEY}`;
+    const url = `${`https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely&units=metric&appid=`}${API_KEY}`;
     const response = await fetch(url);
 
     try {
@@ -40,6 +40,7 @@ const Form = ({ setWeatherData }) => {
       const result = await response.json();
       setIsLoading(false);
       // pass the weather data to parent component
+      console.log(result);
       setWeatherData(result);
     } catch (error) {
       console.log(error);

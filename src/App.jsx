@@ -15,7 +15,7 @@ function App() {
       <div className="page-container">
         <Header />
         <Form setWeatherData={setWeatherData} />
-        <Layout />
+        {weatherData && <Layout data={weatherData} />}
       </div>
     </>
   );

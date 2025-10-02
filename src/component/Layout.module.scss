@@ -13,7 +13,7 @@
 
   .card {
     border: 1px solid rgba(0, 0, 0, 0.2);
-    width: 120px;
+    width: 140px;
     display: inline-block;
     padding: 12px;
     border-radius: 8px;
@@ -29,6 +29,11 @@
       font-size: 28px;
     }
 
+    img {
+      max-width: 50px;
+      margin: 0 auto;
+    }
+
     .value {
       margin-left: 4px;
       font-size: 22px;
@@ -37,6 +42,7 @@
 
   .cardContainer {
     display: flex;
+    flex-wrap: wrap;
     gap: 24px;
   }
 

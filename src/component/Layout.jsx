@@ -64,7 +64,10 @@ const Layout = ({ data }) => {
           <div className={`${styles.sunrise} ${styles.card}`}>
             <p className={styles.label}>Sunrise</p>
             <div className={styles.iconWrapper}>
-              <IoSunnySharp className={styles.icon} />{" "}
+              <IoSunnySharp
+                className={styles.icon}
+                style={{ color: "orange" }}
+              />{" "}
             </div>
             <span className={styles.value}>
               {convertTo12HourFormat(data.current.sunrise)}
@@ -74,7 +77,7 @@ const Layout = ({ data }) => {
           <div className={`${styles.sunset} ${styles.card}`}>
             <p className={styles.label}>Sunset</p>
             <div className={styles.iconWrapper}>
-              <WiSunset className={styles.icon} />{" "}
+              <WiSunset className={styles.icon} style={{ color: "orange" }} />{" "}
             </div>
             <span className={styles.value}>
               {convertTo12HourFormat(data.current.sunset)}
@@ -120,7 +123,7 @@ const Layout = ({ data }) => {
       </div>
 
       <div className={styles.nextHourWeatherSection}>
-        <h2 className={styles.sectionHeading}>New few hours</h2>
+        <h2 className={styles.sectionHeading}>Next few hours</h2>
         <div className={styles.cardContainer}>
           {data.hourly.map((item, index) => {
             if (index > 7) return false;
@@ -141,7 +144,7 @@ const Layout = ({ data }) => {
       </div>
 
       <div className={styles.weekForcastSection}>
-        <h2 className={styles.sectionHeading}>New few days</h2>
+        <h2 className={styles.sectionHeading}>Next few days</h2>
         <div className={styles.cardContainer}>
           {data.daily.map((item, index) => {
             return (

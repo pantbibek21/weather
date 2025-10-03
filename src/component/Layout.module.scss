@@ -5,10 +5,11 @@
   padding: 36px;
   border-radius: 8px;
   cursor: default;
+  background-color: rgb(0, 105, 137);
 
   .sectionHeading {
     margin-bottom: 24px;
-    color: rgb(0, 105, 137);
+    color: white;
   }
 
   .card {
@@ -63,16 +64,19 @@
 
         .currentTemp {
           font-size: 64px;
+          color: white;
         }
       }
       .currentSituation {
         font-size: 24px;
         margin-bottom: 24px;
+        color: rgba(255, 255, 255, 0.8);
       }
 
       .feelsLike {
         font-size: 20px;
         font-style: italic;
+        color: rgba(255, 255, 255, 0.8);
       }
     }
 
@@ -85,5 +89,86 @@
 
   .nextHourWeatherSection {
     margin-bottom: 60px;
+  }
+}
+
+// styles for responsiveness
+
+@media screen and (max-width: 924px) {
+  .layoutContainer {
+    .topRow {
+      flex-direction: column;
+
+      .left {
+        align-self: flex-start;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 654px) {
+  .layoutContainer {
+    margin: 48px 24px;
+    padding: 24px;
+
+    .topRow {
+      flex-direction: column;
+      margin-bottom: 48px;
+
+      .left {
+        align-self: flex-start;
+
+        .largeContent {
+          .currentTemp {
+            font-size: 46px;
+          }
+        }
+      }
+    }
+
+    .nextHourWeatherSection {
+      margin-bottom: 48px;
+    }
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .layoutContainer {
+    .cardContainer {
+      gap: 16px;
+    }
+
+    .card {
+      width: 46%;
+    }
+
+    .topRow {
+      flex-direction: column;
+      gap: 8px;
+
+      .left {
+        align-self: flex-start;
+
+        .largeContent {
+          .currentTemp {
+            font-size: 24px;
+          }
+
+          img {
+            width: 100px;
+          }
+        }
+        .currentSituation {
+          margin-bottom: 12px;
+        }
+
+        .feelsLike {
+          margin-bottom: 18px;
+        }
+      }
+      .right {
+        gap: 16px;
+      }
+    }
   }
 }

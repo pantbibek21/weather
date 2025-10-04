@@ -9,24 +9,19 @@ function App() {
   const [isDarkModeOn, setIsDarkModeOn] = useState(false);
 
   return (
-    <>
-      <div className={`page-wrapper ${!isDarkModeOn ? "darkModeOn" : ""}`}>
-        <div className={`page-container ${!isDarkModeOn ? "darkModeOn" : ""}`}>
-          <Header
+    <div className={`page-wrapper ${isDarkModeOn ? "darkModeOn" : ""}`}>
+      <div className={`page-container ${isDarkModeOn ? "darkModeOn" : ""}`}>
+        <Header isDarkModeOn={isDarkModeOn} setIsDarkModeOn={setIsDarkModeOn} />
+        <Form setWeatherData={setWeatherData} isDarkModeOn={!isDarkModeOn} />
+        {weatherData && (
+          <Layout
+            data={weatherData}
+            setWeatherData={setWeatherData}
             isDarkModeOn={isDarkModeOn}
-            setIsDarkModeOn={setIsDarkModeOn}
           />
-          <Form setWeatherData={setWeatherData} isDarkModeOn={isDarkModeOn} />
-          {weatherData && (
-            <Layout
-              data={weatherData}
-              setWeatherData={setWeatherData}
-              isDarkModeOn={isDarkModeOn}
-            />
-          )}
-        </div>
+        )}
       </div>
-    </>
+    </div>
   );
 }
 

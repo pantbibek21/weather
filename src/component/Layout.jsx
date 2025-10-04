@@ -4,11 +4,14 @@ import { IoSunnySharp } from "react-icons/io5";
 import { WiSunset } from "react-icons/wi";
 import { TbUvIndex } from "react-icons/tb";
 import { SlEnergy } from "react-icons/sl";
-import { MdAir } from "react-icons/md";
+import { MdAir, MdClose } from "react-icons/md";
 // import data from "../data/data.json";
 
-const Layout = ({ data }) => {
-  console.log(data);
+const Layout = ({ data, setWeatherData }) => {
+  function closeModal() {
+    return setWeatherData("");
+  }
+
   const days = [
     "Sunday",
     "Monday",
@@ -126,7 +129,8 @@ const Layout = ({ data }) => {
         <h2 className={styles.sectionHeading}>Next few hours</h2>
         <div className={styles.cardContainer}>
           {data.hourly.map((item, index) => {
-            if (index > 7) return false;
+            if (index == 0) return false;
+            if (index > 8) return false;
             return (
               <div className={`${styles.max} ${styles.card}`} key={index}>
                 <p className={styles.label}>{convertTo12HourFormat(item.dt)}</p>
@@ -150,7 +154,7 @@ const Layout = ({ data }) => {
             return (
               <div className={`${styles.max} ${styles.card}`} key={index}>
                 <p className={styles.label}>
-                  {days[(getDays() + index) % days.length]}
+                  {days[(getDays() + index + 1) % days.length]}
                 </p>
                 <div className={styles.iconWrapper}>
                   <img
@@ -163,6 +167,10 @@ const Layout = ({ data }) => {
             );
           })}
         </div>
+      </div>
+
+      <div className={styles.closeIcon} onClick={closeModal}>
+        <MdClose />
       </div>
     </section>
   );

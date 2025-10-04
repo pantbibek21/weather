@@ -7,8 +7,6 @@ const Form = ({ setWeatherData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({ lat: null, lon: null });
 
-  console.log("I am in child");
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -84,7 +82,7 @@ const Form = ({ setWeatherData }) => {
 
   async function geoCodeUserInput() {
     const API_KEY = import.meta.env.VITE_API_KEY;
-    const url = `${`http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=1&appid=`}${API_KEY}`;
+    const url = `${`https://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=1&appid=`}${API_KEY}`;
     try {
       const response = await fetch(url);
       if (!response.ok) {

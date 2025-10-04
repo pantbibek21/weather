@@ -3,8 +3,11 @@ import styles from "./Header.module.scss";
 import { MdDarkMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
 
-const Header = () => {
-  const [isLightModeActive, setIsLightModeActive] = useState(true);
+const Header = ({ isDarkModeOn, setIsDarkModeOn }) => {
+  function toggleDarkLightMode() {
+    setIsDarkModeOn(!isDarkModeOn);
+  }
+
   return (
     <header>
       <div className={styles.logoWrapper}>
@@ -13,16 +16,14 @@ const Header = () => {
 
       <div className={styles.iconsWrapper}>
         <span
-          onClick={() => setIsLightModeActive(!isLightModeActive)}
-          className={`${styles.icon} ${isLightModeActive ? styles.active : ""}`}
+          onClick={() => toggleDarkLightMode()}
+          className={`${styles.icon} ${isDarkModeOn ? styles.active : ""}`}
         >
           <MdOutlineLightMode />
         </span>
         <span
-          onClick={() => setIsLightModeActive(!isLightModeActive)}
-          className={`${styles.icon} ${
-            !isLightModeActive ? styles.active : ""
-          }`}
+          onClick={() => toggleDarkLightMode()}
+          className={`${styles.icon} ${!isDarkModeOn ? styles.active : ""}`}
         >
           <MdDarkMode />
         </span>

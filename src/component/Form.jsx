@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Form.module.scss";
 
-const Form = ({ setWeatherData }) => {
+const Form = ({ setWeatherData, isDarkModeOn }) => {
   const [userInput, setUserInput] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -112,13 +112,18 @@ const Form = ({ setWeatherData }) => {
         </div>
         <button type="submit">Search</button>
       </form>
-      <p className={styles.note}>
+      <p
+        className={styles.note}
+        style={{ color: !isDarkModeOn ? "white" : "" }}
+      >
         Get most accurate weather of your area, turning{" "}
         <span onClick={onLocationClick}>location</span> on!
       </p>
       {errorMsg && <p className={styles.errorMsg}>{errorMsg}</p>}
 
-      {isLoading && <p>Loading 🙂...</p>}
+      {isLoading && (
+        <p style={{ color: !isDarkModeOn ? "white" : "" }}> Loading 🙂...</p>
+      )}
     </section>
   );
 };

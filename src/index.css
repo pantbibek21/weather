@@ -14,7 +14,17 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+.page-wrapper.darkModeOn {
+  width: 100%;
+  background-color: black;
+}
+
 .page-container {
   max-width: 1400px;
   margin: 0 auto;
+}
+
+.page-container.darkModeOn {
+  background-color: black;
+  padding-bottom: 48px;
 }
